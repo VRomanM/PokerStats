@@ -1,5 +1,5 @@
 //
-//  S_GamesApp.swift
+//  PokerStatsApp.swift
 //  S-Games
 //
 //  Created by Роман Вертячих on 13/01/2026.
@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @main
-struct S_GamesApp: App {
+struct PokerStatsApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
