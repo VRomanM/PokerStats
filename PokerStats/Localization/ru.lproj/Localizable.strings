@@ -1,0 +1,33 @@
+/* 
+  Localizable.strings
+  PokerStats
+
+  Created by Роман Вертячих on 19/01/2026.
+  
+*/
+
+"CHOOSE AN AVATAR" = "ВЫБЕРЕТЕ АВАТАР";
+
+"DONE" = "ГОТОВО";
+
+"Enter nickname" = "Введите никнейм";
+
+"FEMALE" = "ЖЕНСКИЙ";
+
+"Gender" = "Пол";
+"Good luck at the table!" = "Удачи за столом!";
+
+"MALE" = "МУЖСКОЙ";
+
+"Name" = "Имя";
+"Nickname" = "Никнейм";
+
+"Optional" = "Опционально";
+
+"Player" = "Игрок";
+"Player Information" = "Информация об Игроке";
+"PLAYER PROFILE" = "ПРОФИЛЬ ИГРОКА";
+"PROFILE SAVED" = "ПРОФИЛЬ СОХРАНЕН";
+
+"SAVE" = "СОХРАНИТЬ";
+"Surname" = "Фамилия";
