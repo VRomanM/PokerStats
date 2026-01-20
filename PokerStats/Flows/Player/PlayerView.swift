@@ -25,7 +25,7 @@ struct PlayerView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                MainBackground()
+                LinearGradient.pokerCloth
                 .ignoresSafeArea()
                 
                 ScrollView {
@@ -42,10 +42,10 @@ struct PlayerView: View {
                             // Заголовок карточки
                             HStack {
                                 Image(systemName: "person.text.rectangle.fill")
-                                    .foregroundColor(Color(hex: "D4AF37"))
+                                    .foregroundColor(.backgroundPrimaryShade1)
                                 Text("Player Information")
                                     .font(.headline)
-                                    .foregroundColor(Color(hex: "D4AF37"))
+                                    .foregroundColor(.backgroundPrimaryShade1)
                                 Spacer()
                             }
                             .padding(.horizontal)
@@ -81,24 +81,26 @@ struct PlayerView: View {
                                 VStack(alignment: .leading, spacing: 12) {
                                     HStack {
                                         Image(systemName: "person.2.fill")
-                                            .foregroundColor(Color(hex: "D4AF37"))
+                                            .foregroundColor(.backgroundPrimaryShade1)
                                         Text("Gender")
                                             .font(.caption)
                                             .fontWeight(.bold)
-                                            .foregroundColor(Color(hex: "D4AF37"))
+                                            .foregroundColor(.backgroundPrimaryShade1)
                                     }
                                     
                                     HStack(spacing: 15) {
-                                        PokerSelectButton(
+                                        PokerButton(
                                             title: "MALE".localized(),
                                             icon: "mustache.fill",
+                                            fontSize: .small,
                                             isSelected: gender == .male,
                                             action: { gender = .male }
                                         )
                                         
-                                        PokerSelectButton(
+                                        PokerButton(
                                             title: "FEMALE".localized(),
                                             icon: "mouth.fill",
+                                            fontSize: .small,
                                             isSelected: gender == .female,
                                             action: { gender = .female }
                                         )
@@ -112,8 +114,7 @@ struct PlayerView: View {
                             PokerButton(
                                 title: "SAVE".localized(),
                                 icon: "checkmark.circle.fill",
-                                action: savePlayer,
-                                style: .primary
+                                action: savePlayer
                             )
                             .padding(.horizontal)
                             .padding(.top, 10)
@@ -122,27 +123,16 @@ struct PlayerView: View {
                         .background(
                             RoundedRectangle(cornerRadius: 20)
                                 .fill(
-                                    LinearGradient(
-                                        colors: [
-                                            Color(hex: "1E2D2D"),
-                                            Color(hex: "152424")
-                                        ],
-                                        startPoint: .top,
-                                        endPoint: .bottom
-                                    )
+                                    LinearGradient.pokerClothReverse
                                 )
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 20)
                                         .stroke(
-                                            LinearGradient(
-                                                colors: [Color(hex: "D4AF37").opacity(0.3), Color(hex: "8B7355").opacity(0.1)],
-                                                startPoint: .topLeading,
-                                                endPoint: .bottomTrailing
-                                            ),
+                                            LinearGradient.border,
                                             lineWidth: 1
                                         )
                                 )
-                                .shadow(color: .black.opacity(0.3), radius: 15, x: 0, y: 5)
+                                .shadow(color: .backgroundSecondaryShade1.opacity(0.3), radius: 15, x: 0, y: 5)
                         )
                         .padding(.horizontal, 20)
                         .padding(.bottom, 40)
@@ -151,7 +141,7 @@ struct PlayerView: View {
                 
                 // Конфирмация сохранения
                 if showSaveConfirmation {
-                    InformationAlertView(title: "PROFILE SAVED", message: "Good luck at the table!")
+                    InformationAlertView(title: "PROFILE SAVED".localized(), message: "Good luck at the table!".localized())
                         .transition(.scale.combined(with: .opacity))
                 }
             }
@@ -160,7 +150,7 @@ struct PlayerView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Image(systemName: "suit.spade.fill")
-                        .foregroundColor(Color(hex: "D4AF37"))
+                        .foregroundColor(.backgroundPrimaryShade1)
                 }
             }
             .sheet(isPresented: $isEmojiPickerPresented) {

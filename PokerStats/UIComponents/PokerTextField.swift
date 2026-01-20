@@ -17,12 +17,12 @@ struct PokerTextField: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Image(systemName: icon)
-                    .foregroundColor(Color(hex: "D4AF37"))
+                    .foregroundColor(.backgroundPrimaryShade1)
                     .font(.caption)
                 Text(title)
                     .font(.caption)
                     .fontWeight(.bold)
-                    .foregroundColor(Color(hex: "D4AF37"))
+                    .foregroundColor(.backgroundPrimaryShade1)
                 Spacer()
             }
             
@@ -30,15 +30,19 @@ struct PokerTextField: View {
                 .padding()
                 .background(
                     RoundedRectangle(cornerRadius: 12)
-                        .fill(Color(hex: "0C1A1A"))
+                        .fill(Color.backgroundSecondaryShade1)
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color(hex: "8B7355").opacity(0.3), lineWidth: 1)
+                        .stroke(Color.backgroundPrimaryShade2.opacity(0.3), lineWidth: 1)
                 )
-                .foregroundColor(.white)
+                .foregroundColor(Color.textWhite)
                 .font(.system(size: 16, weight: .medium))
         }
         .padding(.horizontal)
     }
+}
+
+#Preview {
+    PokerTextField(title: "Title", placeholder: "Placeholder", text: .constant("Text"), icon: "person")
 }

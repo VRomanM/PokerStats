@@ -23,44 +23,34 @@ struct PokerEmojiPickerView: View {
                     selectedEmoji = emoji
                     dismiss()
                 }) {
-                    Text(emoji)
-                        .font(.system(size: 35))
-                        .frame(width: 50, height: 50)
-                        .background(
-                            Circle()
-                                .fill(
-                                    selectedEmoji == emoji
-                                        ? AnyShapeStyle(LinearGradient(
-                                            colors: [Color(hex: "D4AF37"), Color(hex: "B8860B")],
-                                            startPoint: .top,
-                                            endPoint: .bottom
-                                        ))
-                                        : AnyShapeStyle(Color(hex: "1E2D2D"))
-                                )
-                        )
-                        .overlay(
-                            Circle()
-                                .stroke(
-                                    selectedEmoji == emoji ? Color.black : Color(hex: "8B7355").opacity(0.3),
-                                    lineWidth: 2
-                                )
-                        )
+                    ZStack {
+                        Circle()
+                            .fill(
+                                selectedEmoji == emoji
+                                    ? AnyShapeStyle(LinearGradient.primary)
+                                    : AnyShapeStyle(Color.backgroundSecondaryShade2)
+                            )
+                        Text(emoji)
+                            .font(.system(size: 30))
+                        Circle()
+                            .stroke(
+                                selectedEmoji == emoji ? Color.backgroundSecondaryShade1 : .backgroundPrimaryShade2.opacity(0.3),
+                                lineWidth: 2
+                            )
+                    }
+                    .frame(width: 50, height: 50)
                 }
                 .buttonStyle(PlainButtonStyle())
             }
         }
         .padding(20)
     }
-    
+ 
     var body: some View {
         NavigationStack {
             ZStack {
                 // Фон
-                LinearGradient(
-                    colors: [Color(hex: "0C1A1A"), Color(hex: "152424")],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
+                LinearGradient.pokerCloth
                 .ignoresSafeArea()
                 
                 ScrollView {
@@ -75,11 +65,14 @@ struct PokerEmojiPickerView: View {
                         dismiss()
                     }
                     .fontWeight(.bold)
-                    .foregroundColor(Color(hex: "D4AF37"))
+                    .foregroundColor(.backgroundPrimaryShade1)
                 }
             }
-            .toolbarBackground(Color(hex: "0C1A1A"), for: .navigationBar)
             .preferredColorScheme(.dark)
         }
     }
+}
+
+#Preview {
+    PokerEmojiPickerView(selectedEmoji: .constant("🃏"), emojis: ["♠️", "♣️", "♥️", "♦️", "🃏", "👑", "💰", "🏆", "🎲", "🫦", "🥃", "🚬", "💎", "💵", "🎰", "🎯", "⚡", "🔥", "💀", "₿"])
 }

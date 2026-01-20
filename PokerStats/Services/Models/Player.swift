@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Player {
+final class Player {
     var nickname: String
     var avatar: String?
     var surname: String?

@@ -8,60 +8,61 @@
 import SwiftUI
 
 struct PokerButton: View {
-    enum Style {
-        case primary
-        case secondary
+    enum FontSize: CGFloat {
+        case small = 12
+        case medium = 14
+        case large = 18
     }
     
     let title: String
     let icon: String
+    let fontSize: FontSize
+    let isSelected: Bool
     let action: () -> Void
-    let style: Style
     
     var body: some View {
         Button(action: action) {
             HStack(spacing: 12) {
                 Image(systemName: icon)
                 Text(title)
-                    .fontWeight(.bold)
+                    .font(.system(size: fontSize.rawValue, weight: .bold))
             }
             .frame(maxWidth: .infinity)
-            .padding(.vertical, style == .primary ? 18 : 14)
+            .padding(.vertical, 18)
             .padding(.horizontal, 20)
             .background(
                 Group {
-                    switch style {
-                    case .primary:
-                        LinearGradient(
-                            colors: [
-                                Color(hex: "D4AF37"),
-                                Color(hex: "B8860B")
-                            ],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                    case .secondary:
-                        Color.clear
+                    if isSelected {
+                        LinearGradient.primary
+                    } else {
+                        Color.backgroundSecondaryShade1
                     }
                 }
             )
-            .foregroundColor(style == .primary ? .black : Color(hex: "D4AF37"))
+            .foregroundColor(isSelected ? .backgroundSecondaryShade1 : .backgroundPrimaryShade2)
             .cornerRadius(15)
             .overlay(
                 RoundedRectangle(cornerRadius: 15)
                     .stroke(
-                        style == .primary ? Color(hex: "FFD700") : Color(hex: "D4AF37").opacity(0.5),
-                        lineWidth: style == .primary ? 0 : 2
+                        isSelected ? Color.backgroundPrimaryShade3 : .backgroundPrimaryShade2.opacity(0.3),
+                        lineWidth: isSelected ? 2 : 1
                     )
-            )
-            .shadow(
-                color: style == .primary ? Color(hex: "D4AF37").opacity(0.4) : .clear,
-                radius: style == .primary ? 10 : 0,
-                x: 0,
-                y: style == .primary ? 5 : 0
             )
         }
         .buttonStyle(PlainButtonStyle())
-        .scaleEffect(style == .primary ? 1 : 0.95)
+        .scaleEffect(1)
     }
+    
+    init(title: String, icon: String, fontSize: FontSize = .medium, isSelected: Bool = true, action: @escaping () -> Void) {
+        self.title = title
+        self.icon = icon
+        self.fontSize = fontSize
+        self.isSelected = isSelected
+        self.action = action
+    }
+}
+
+#Preview {
+    PokerButton(title: "Title", icon: "ballhand.fill", action: { print("Save player")})
+    PokerButton(title: "Title", icon: "ballhand.fill", isSelected: false,  action: { print("Save player") })
 }
