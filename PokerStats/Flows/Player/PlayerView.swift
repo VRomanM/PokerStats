@@ -38,7 +38,7 @@ struct PlayerView: View {
                         .padding(.bottom, 40)
                         
                         // Карточка с информацией
-                        VStack(spacing: 25) {
+                        VStack(spacing: 20) {
                             // Заголовок карточки
                             HStack {
                                 Image(systemName: "person.text.rectangle.fill")
@@ -52,7 +52,7 @@ struct PlayerView: View {
                             .padding(.top, 20)
                             
                             // Поля ввода
-                            VStack(spacing: 25) {
+                            VStack(spacing: 10) {
                                 // Никнейм
                                 PokerTextField(
                                     title: "Nickname".localized(),
@@ -155,6 +155,7 @@ struct PlayerView: View {
             }
             .sheet(isPresented: $isEmojiPickerPresented) {
                 PokerEmojiPickerView(selectedEmoji: $selectedEmoji, emojis: pokerEmojis)
+                    .presentationDetents([.medium])
             }
             .onAppear {
                 loadExistingPlayer()
